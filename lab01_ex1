@@ -1,0 +1,53 @@
+//
+// Created by Administrator on 2019/10/7 0007.
+//
+#include<stdlib.h>
+#include<stdio.h>
+/*
+*
+Write a C program able to:
+- Read an array of integer values of size DIM, where DIM is a
+  pre-defined constant.
+- Find and print-out the longest ascending sub-sequence on integer
+  values within the array.
+Example
+-------
+Let DIM be equal to 15, ant let the array be the following one:
+2 3 4 -1 -10 5 6 8 11 -9 8 -10 9 3 0
+The program has to print-out the sub-sequence:
+-10   5   6   8   11
+*/
+int main(){
+    int i, posMax, lengthMax, length;
+    int DIM = 15;
+    int array[DIM];
+
+    /* array initialization */
+    for (i=0; i<DIM; i++) {
+        printf("Input v[%d]: ", i);
+        scanf("%d", &array[i]);
+    }
+
+    posMax = length = 0;
+    lengthMax = 1;
+    /* max length search */
+    for (i=0; i<DIM; i++) {
+        if (i<DIM-1 && array[i]<array[i+1]) {
+            length++;
+        } else {
+            if (length > lengthMax) {
+                lengthMax = length + 1;
+                posMax = i - length;
+            }
+            length = 0;
+        }
+    }
+
+    /* output result */
+    printf("Longest positive sequence (start at element %d): ", posMax);
+    for (i=posMax; i<posMax+lengthMax; i++) {
+        printf("%d ", array[i]);
+    }
+    printf("\n");
+    return 0;
+}
